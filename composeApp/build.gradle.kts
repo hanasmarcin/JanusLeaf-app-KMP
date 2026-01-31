@@ -14,13 +14,14 @@ kotlin {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
-    
+
     sourceSets {
         androidMain.dependencies {
-            implementation("androidx.compose.ui:ui-tooling-preview")
-            implementation("androidx.activity:activity-compose")
+            implementation(compose.preview)
+            implementation(libs.androidx.activity.compose)
             implementation(libs.androidx.adaptive)
-            implementation(libs.androidx.adaptive.layout)        }
+            implementation(libs.androidx.adaptive.layout)
+        }
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -66,7 +67,6 @@ android {
 }
 
 dependencies {
-    implementation(platform("androidx.compose:compose-bom:2026.01.01"))
-    debugImplementation("androidx.compose.ui:ui-tooling")
+    debugImplementation(compose.uiTooling)
 }
 
