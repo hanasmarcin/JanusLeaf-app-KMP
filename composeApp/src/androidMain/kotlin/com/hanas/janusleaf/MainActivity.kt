@@ -4,9 +4,13 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Devices
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation3.runtime.entryProvider
+import androidx.navigation3.runtime.rememberNavBackStack
+import androidx.navigation3.ui.NavDisplay
+import com.hanas.janusleaf.home.HomeNavKey
+import com.hanas.janusleaf.home.homeNavEntry
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,16 +18,20 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            App()
+            MaterialTheme {
+                MainComposable()
+            }
         }
     }
 }
 
-@Preview(device = Devices.PHONE)
-@Preview(device = "spec:width=411dp,height=891dp,orientation=landscape")
-@Preview(device = Devices.FOLDABLE)
-@Preview(device = Devices.TABLET)
 @Composable
-fun AppAndroidPreview() {
-    App()
+private fun MainComposable() {
+    val backStack = rememberNavBackStack(HomeNavKey)
+    NavDisplay(
+        backStack = backStack,
+        entryProvider = entryProvider {
+            homeNavEntry()
+        }
+    )
 }
